@@ -7,6 +7,7 @@
 #include <vector>
 #include <cctype>
 #include <iostream>
+#include <unordered_map>
 
 void Lexer::advance() {
     pos++;
@@ -29,7 +30,7 @@ Token Lexer::integer() {
         result += currentChar;
         advance();
     }
-    return {TokenEnum::TOKEN_INTEGER_LITERAL, result};
+    return {TokenEnum::INTEGER_LITERAL, result};
 }
 
 Token Lexer::identifier() {
@@ -38,10 +39,10 @@ Token Lexer::identifier() {
         result += currentChar;
         advance();
     }
-    return {TokenEnum::TOKEN_IDENTIFICATOR, result};
+    return {TokenEnum::IDENTIFICATOR, result};
 }
 
-Token Lexer::getNextToken() {
+Token Lexer::getNextToken(int line) {
     while (currentChar != '\0') {
         if (isspace(currentChar)) {
             skipWhitespace();
@@ -56,40 +57,36 @@ Token Lexer::getNextToken() {
             return identifier();
         }
 
-        switch (currentChar) {
-            case '+':
-                advance();
-                return {TokenEnum::TOKEN_ADD, "+"};
-            case '-':
-                advance();
-                return {TokenEnum::TOKEN_SUB, "-"};
-            case '*':
-                advance();
-                return {TokenEnum::TOKEN_MULT, "*"};
-            case '/':
-                advance();
-                return {TokenEnum::TOKEN_DIV, "/"};
-            case '(':
-                advance();
-                return {TokenEnum::TOKEN_RPAREN, "("};
-            case ')':
-                advance();
-                return {TokenEnum::TOKEN_LPAREN, ")"};
-            default:
-                std::cerr << "Invalid character: " << currentChar << ". Error at line: " << "line" << std::endl;
-                exit(1);
+        std::unordered_map<char, std::pair<TokenEnum, std::string>> tokenMap = {
+                {'+', {TokenEnum::ADD, "+"}},
+                {'-', {TokenEnum::SUB, "-"}},
+                {'*', {TokenEnum::MULT, "*"}},
+                {'/', {TokenEnum::DIV, "/"}},
+                {'(', {TokenEnum::RPAREN, "("}},
+                {')', {TokenEnum::LPAREN, ")"}}
+        };
+
+        if (tokenMap.find(currentChar) != tokenMap.end()) {
+            advance();
+            return {tokenMap[currentChar].first, std::to_string(currentChar)};
+        } else {
+            std::cerr << "Invalid character: " << currentChar << " Error at line: " << line << " In position: " << pos << std::endl;
+            advance();
+            return {TokenEnum::ERROR, std::to_string(line)};
+            //exit(1);
         }
     }
 
     return {TokenEnum::TOKEN_EOF, ""};
 }
 
-std::vector<Token> Lexer::generateTokens() {
+std::vector<Token> Lexer::generateTokens(int line) {
     std::vector<Token> tokens;
-    Token token = getNextToken();
+    Token token = getNextToken(line);
     while (token.type != TokenEnum::TOKEN_EOF) {
         tokens.emplace_back(token);
-        token = getNextToken();
+        token = getNextToken(line);
     }
+    tokens.emplace_back(Token{TokenEnum::TOKEN_EOF, ""});
     return tokens;
 }

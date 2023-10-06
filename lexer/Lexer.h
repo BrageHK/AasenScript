@@ -32,9 +32,9 @@ private:
 public:
     explicit Lexer(const std::string& input) : input(input), currentChar(input[0]) {}
 
-    Token getNextToken();
+    Token getNextToken(int line);
 
-    std::vector<Token> generateTokens();
+    std::vector<Token> generateTokens(int line);
 };
 
 #endif //NORLANG_LEXER_H

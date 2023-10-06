@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
 #include "enums/TokenEnum.h"
 #include "lexer/Lexer.h"
 
@@ -23,7 +22,7 @@ void runFile(const char* path) {
 
 void runPrompt() {
     std::cout << "Norlang, et proggerpåk med forferdelig (!bra) syntax!!!" << std::endl;
-
+    int lineNumber = 1;
     for(;;) {
         std::cout << ">> ";
         std::string line;
@@ -32,7 +31,7 @@ void runPrompt() {
             break;
         }
         Lexer lexer(line);
-        for(auto token : lexer.generateTokens()) {
+        for(const auto& token : lexer.generateTokens(lineNumber++)) {
             std::cout << "[" << static_cast<int>(token.type) << ", " << token.value << "]" <<  std::endl;
         }
     }
