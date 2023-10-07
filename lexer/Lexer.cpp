@@ -22,7 +22,9 @@ std::unordered_map<std::string, TokenEnum> keywords = {
         {"denne", TokenEnum::THIS},
         {"intet", TokenEnum::INTET},
         {"urørleg", TokenEnum::CONST},
-        {"Sanning", TokenEnum::BOOL}
+        {"Sanning", TokenEnum::BOOL},
+        {"usann", TokenEnum::FALSE},
+        {"sann", TokenEnum::TRUE}
 };
 
 void Lexer::advance() {
@@ -128,7 +130,13 @@ Token Lexer::getNextToken(int line) {
                 {'*', {TokenEnum::MULT, "*"}},
                 {'/', {TokenEnum::DIV, "/"}},
                 {'(', {TokenEnum::RPAREN, "("}},
-                {')', {TokenEnum::LPAREN, ")"}}
+                {')', {TokenEnum::LPAREN, ")"}},
+                {'.', {TokenEnum::DOT, "."}},
+                {',', {TokenEnum::COMMA, ","}},
+                {';', {TokenEnum::SEMICOLON, ";"}},
+                {'{', {TokenEnum::LBRACE, "{"}},
+                {'}', {TokenEnum::RBRACE, "}"}},
+                {':', {TokenEnum::COLON, ":"}},
         };
         std::pair<TokenEnum, std::basic_string<char>> currentToken = tokenMap.find(currentChar)->second;
         if (tokenMap.find(currentChar) != tokenMap.end()) {

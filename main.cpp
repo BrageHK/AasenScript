@@ -34,6 +34,7 @@ void runPrompt() {
         for(const auto& token : lexer.generateTokens(lineNumber++)) {
             std::cout << "[" << static_cast<int>(token.type) << ", " << token.value << "]" <<  std::endl;
         }
+
     }
 }
 

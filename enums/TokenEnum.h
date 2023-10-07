@@ -50,6 +50,8 @@ enum class TokenEnum : int {
     ERROR,                // feil
     CONST,                // urørleg
     BOOL,                 // Sanning
+    FALSE,                // usanning
+    TRUE,                 // sanning
 
 
 };

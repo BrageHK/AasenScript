@@ -9,7 +9,6 @@
 #include <vector>
 #include "../enums/TokenEnum.h"
 
-
 struct Token {
     TokenEnum type;
     std::string value;

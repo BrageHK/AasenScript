@@ -75,3 +75,8 @@
 1113	1277	7183873546425165	norlang.exe	c9599174377727fc
 3	1164	7183881212614155	CMakeFiles/norlang.dir/lexer/Lexer.cpp.obj	e7d98448884f086f
 1165	1336	7183881214337718	norlang.exe	c9599174377727fc
+12	676	7184199043044445	CMakeFiles/norlang.dir/main.cpp.obj	8bffe7c029376fa5
+8	1087	7184199047135823	CMakeFiles/norlang.dir/lexer/Lexer.cpp.obj	e7d98448884f086f
+4	566	7184199165674229	CMakeFiles/norlang.dir/parser/Parser.cpp.obj	30d79753dccc4bd4
+3	557	7184210576776040	CMakeFiles/norlang.dir/parser/Parser.cpp.obj	30d79753dccc4bd4
+557	719	7184210578364327	norlang.exe	c9599174377727fc
