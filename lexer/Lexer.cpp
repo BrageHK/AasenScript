@@ -86,19 +86,40 @@ Token Lexer::getNextToken(int line) {
             return identifier();
         }
 
-        switch(currentChar) {
-            case '!':
-                return nextMatch('=', TokenEnum::NOT_EQUAL, TokenEnum::NOT);
-            case '=':
-                return nextMatch('=', TokenEnum::EQUAL_EQUAL, TokenEnum::EQUAL);
-            case '<':
-                return nextMatch('=', TokenEnum::LESS_THAN_EQUAL, TokenEnum::LESS_TAN);
-            case '>':
-                return nextMatch('=', TokenEnum::GREATER_THAN_EQUAL, TokenEnum::GREATER_THAN);
-            case '&':
-                return nextMatch('&', TokenEnum::AND, TokenEnum::ERROR);
-            case '|':
-                return nextMatch('|', TokenEnum::OR, TokenEnum::ERROR);
+        {
+            std::string result;
+            switch(currentChar) {
+                case '"':
+                    advance();
+
+                    while(currentChar != '\0' && currentChar != '"') {
+                        result += currentChar;
+                        advance();
+                    }
+                    advance();
+                    return {TokenEnum::STRING_LITERAL, result};
+                case '\'':
+                    advance();
+
+                    while(currentChar != '\0' && currentChar != '\'') {
+                        result += currentChar;
+                        advance();
+                    }
+                    advance();
+                    return {TokenEnum::STRING_LITERAL, result};
+                case '!':
+                    return nextMatch('=', TokenEnum::NOT_EQUAL, TokenEnum::NOT);
+                case '=':
+                    return nextMatch('=', TokenEnum::EQUAL_EQUAL, TokenEnum::EQUAL);
+                case '<':
+                    return nextMatch('=', TokenEnum::LESS_THAN_EQUAL, TokenEnum::LESS_TAN);
+                case '>':
+                    return nextMatch('=', TokenEnum::GREATER_THAN_EQUAL, TokenEnum::GREATER_THAN);
+                case '&':
+                    return nextMatch('&', TokenEnum::AND, TokenEnum::ERROR);
+                case '|':
+                    return nextMatch('|', TokenEnum::OR, TokenEnum::ERROR);
+            }
         }
 
         std::unordered_map<char, std::pair<TokenEnum, std::string>> tokenMap = {
