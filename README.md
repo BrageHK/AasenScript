@@ -1,2 +1,2 @@
 # MemeLang
-This centenrly is a programming language
+This certainly is a programming language
