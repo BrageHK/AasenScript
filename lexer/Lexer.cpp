@@ -9,6 +9,22 @@
 #include <iostream>
 #include <unordered_map>
 
+std::unordered_map<std::string, TokenEnum> keywords = {
+        {"hvis", TokenEnum::IF},
+        {"ellers", TokenEnum::ELSE},
+        {"mens", TokenEnum::WHILE},
+        {"for", TokenEnum::FOR},
+        {"skriv", TokenEnum::PRINT},
+        {"returner", TokenEnum::RETURN},
+        {"funksjon", TokenEnum::FUNCTION},
+        {"klasse", TokenEnum::CLASS},
+        {"super", TokenEnum::SUPER},
+        {"denne", TokenEnum::THIS},
+        {"intet", TokenEnum::INTET},
+        {"urørleg", TokenEnum::CONST},
+        {"Sanning", TokenEnum::BOOL}
+};
+
 void Lexer::advance() {
     pos++;
     if (pos < input.length()) {
@@ -39,7 +55,20 @@ Token Lexer::identifier() {
         result += currentChar;
         advance();
     }
+    if (keywords.find(result) != keywords.end()) {
+        return {keywords.find(result)->second, result};
+    }
     return {TokenEnum::IDENTIFICATOR, result};
+}
+
+Token Lexer::nextMatch(char c, TokenEnum match, TokenEnum noMatch) {
+    char prevChar = currentChar;
+    advance();
+    if(currentChar == c) {
+        advance();
+        return {match, std::string(1, prevChar) + std::string(1, c)};
+    }
+    return {noMatch, std::string(1, prevChar)};
 }
 
 Token Lexer::getNextToken(int line) {
@@ -57,6 +86,21 @@ Token Lexer::getNextToken(int line) {
             return identifier();
         }
 
+        switch(currentChar) {
+            case '!':
+                return nextMatch('=', TokenEnum::NOT_EQUAL, TokenEnum::NOT);
+            case '=':
+                return nextMatch('=', TokenEnum::EQUAL_EQUAL, TokenEnum::EQUAL);
+            case '<':
+                return nextMatch('=', TokenEnum::LESS_THAN_EQUAL, TokenEnum::LESS_TAN);
+            case '>':
+                return nextMatch('=', TokenEnum::GREATER_THAN_EQUAL, TokenEnum::GREATER_THAN);
+            case '&':
+                return nextMatch('&', TokenEnum::AND, TokenEnum::ERROR);
+            case '|':
+                return nextMatch('|', TokenEnum::OR, TokenEnum::ERROR);
+        }
+
         std::unordered_map<char, std::pair<TokenEnum, std::string>> tokenMap = {
                 {'+', {TokenEnum::ADD, "+"}},
                 {'-', {TokenEnum::SUB, "-"}},
@@ -65,12 +109,12 @@ Token Lexer::getNextToken(int line) {
                 {'(', {TokenEnum::RPAREN, "("}},
                 {')', {TokenEnum::LPAREN, ")"}}
         };
-
+        std::pair<TokenEnum, std::basic_string<char>> currentToken = tokenMap.find(currentChar)->second;
         if (tokenMap.find(currentChar) != tokenMap.end()) {
             advance();
-            return {tokenMap[currentChar].first, std::to_string(currentChar)};
+            return {currentToken.first, currentToken.second};
         } else {
-            std::cerr << "Invalid character: " << currentChar << " Error at line: " << line << " In position: " << pos << std::endl;
+            std::cerr << "Invalid character: [ " << currentChar << " ] Error at line: " << line << ". In position: " << pos << "." << std::endl;
             advance();
             return {TokenEnum::ERROR, std::to_string(line)};
             //exit(1);

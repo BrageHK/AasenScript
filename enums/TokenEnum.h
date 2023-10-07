@@ -6,7 +6,7 @@
 #define NORLANG_TOKENENUM_H
 
 enum class TokenEnum : int {
-    INTEGER_LITERAL,      // heltall
+    INTEGER_LITERAL,      // heiltall
     IDENTIFICATOR,        //
     STRING_LITERAL,       // streng
 
@@ -48,6 +48,8 @@ enum class TokenEnum : int {
     THIS,                 // denne
     INTET,                // null/intet
     ERROR,                // feil
+    CONST,                // urørleg
+    BOOL,                 // Sanning
 
 
 };

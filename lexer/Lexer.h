@@ -29,6 +29,8 @@ private:
 
     Token identifier();
 
+    Token nextMatch(char c, TokenEnum match, TokenEnum noMatch);
+
 public:
     explicit Lexer(const std::string& input) : input(input), currentChar(input[0]) {}
 
