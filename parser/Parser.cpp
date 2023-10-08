@@ -1,6 +1,7 @@
 #include <utility>
 
 #include "Parser.h"
+#include "Expression.h"
 
 std::unique_ptr<Expression> Parser::expression() {
     return equality();
@@ -118,6 +119,8 @@ Token Parser::eat(TokenEnum type) {
 
 void Parser::parse() {
     std::unique_ptr<Expression> expr = expression();
-    std::cout << expr->Operator << std::endl;
-
+    std::cout << "Printing expression from parser" << std::endl;
+    //std::cout << tokens.size() << " " << currentTokenIndex << static_cast<int>(expr->Operator) << std::endl;
+    expr->print();
+    std::cout << "left node operator number: " << static_cast<int>(expr->Left->Operator) << std::endl;
 }

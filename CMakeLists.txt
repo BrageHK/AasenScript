@@ -3,4 +3,4 @@ project(norlang)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(norlang main.cpp enums/TokenEnum.h lexer/Lexer.cpp lexer/Lexer.h parser/Parser.cpp parser/Parser.h)
+add_executable(norlang main.cpp enums/TokenEnum.h lexer/Lexer.cpp lexer/Lexer.h parser/Parser.cpp parser/Parser.h parser/Expression.cpp parser/Expression.h)

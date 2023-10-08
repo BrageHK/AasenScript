@@ -150,12 +150,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "parser/ExpressionPrint.cpp",
+			"path" : "parser/Expression.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "parser/ExpressionPrint.h",
+			"path" : "parser/Expression.h",
 			"sourceGroupIndex" : 1
 		}
 	],

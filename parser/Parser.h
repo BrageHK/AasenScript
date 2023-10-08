@@ -6,16 +6,8 @@
 #include <vector>
 #include <memory>
 #include "../lexer/lexer.h" // Assuming the lexer is defined in "lexer.h"
+#include "Expression.h"
 
-class Expression {
-public:
-    Expression *Left;
-    Expression *Right;
-    TokenEnum Operator;
-
-    Expression(Expression* left, Expression* right, TokenEnum op)
-            : Left(left), Right(right), Operator(op) {};
-};
 
 // Parser class
 class Parser {
