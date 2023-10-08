@@ -3,6 +3,7 @@
 #include <string>
 #include "enums/TokenEnum.h"
 #include "lexer/Lexer.h"
+#include "parser/Parser.h"
 
 void runFile(const char* path) {
     std::cout << path << std::endl;
@@ -31,9 +32,12 @@ void runPrompt() {
             break;
         }
         Lexer lexer(line);
-        for(const auto& token : lexer.generateTokens(lineNumber++)) {
+        std::vector<Token> tokens = lexer.generateTokens(lineNumber++);
+        for(const auto& token : tokens) {
             std::cout << "[" << static_cast<int>(token.type) << ", " << token.value << "]" <<  std::endl;
         }
+        Parser parser(tokens);
+        parser.parse();
 
     }
 }

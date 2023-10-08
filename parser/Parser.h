@@ -4,35 +4,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "../lexer/lexer.h" // Assuming the lexer is defined in "lexer.h"
 
-// Forward declarations
-class AST;
-class BinOp;
-class Num;
-
-// AST base class
-class AST {
+class Expression {
 public:
-    virtual ~AST() {}
-};
+    Expression *Left;
+    Expression *Right;
+    TokenEnum Operator;
 
-// Binary operation node
-class BinOp : public AST {
-public:
-    Token op;
-    AST* left;
-    AST* right;
-
-    BinOp(AST* left, Token op, AST* right) : left(left), op(std::move(op)), right(right) {};
-    ~BinOp() override;
-};
-
-// Number node
-class Num : public AST {
-public:
-    Token token;
-    explicit Num(Token token): token(std::move(token)) {};
+    Expression(Expression* left, Expression* right, TokenEnum op)
+            : Left(left), Right(right), Operator(op) {};
 };
 
 // Parser class
@@ -42,21 +24,27 @@ private:
     std::vector<Token> tokens;
     Token currentToken;
 
+    bool match(std::initializer_list<TokenEnum> types);
     void advance();
+    Token peek();
+    Token previous();
+    Token eat(TokenEnum type);
 
-    AST* factor();
-
-    AST* term();
-
-    AST* expression();
+    std::unique_ptr<Expression> expression();
+    std::unique_ptr<Expression> equality();
+    std::unique_ptr<Expression> comparison();
+    std::unique_ptr<Expression> term();
+    std::unique_ptr<Expression> factor();
+    std::unique_ptr<Expression> unary();
+    std::unique_ptr<Expression> primary();
 
 public:
     explicit Parser(std::vector<Token> tokens) : tokens(std::move(tokens)) {
         this->currentToken = this->tokens[0];
     }
-    AST* parse();
 
-    void eat(TokenEnum type);
+    void parse();
+
 };
 
 #endif // PARSER_H

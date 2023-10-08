@@ -114,7 +114,7 @@ Token Lexer::getNextToken(int line) {
                 case '=':
                     return nextMatch('=', TokenEnum::EQUAL_EQUAL, TokenEnum::EQUAL);
                 case '<':
-                    return nextMatch('=', TokenEnum::LESS_THAN_EQUAL, TokenEnum::LESS_TAN);
+                    return nextMatch('=', TokenEnum::LESS_THAN_EQUAL, TokenEnum::LESS_THAN);
                 case '>':
                     return nextMatch('=', TokenEnum::GREATER_THAN_EQUAL, TokenEnum::GREATER_THAN);
                 case '&':

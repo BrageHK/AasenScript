@@ -26,7 +26,7 @@ enum class TokenEnum : int {
     COLON,                // :
     LESS_THAN_LESS_THAN,  // <<
     GREATER_THAN_GREATER_THAN, // >>
-    LESS_TAN,             // <
+    LESS_THAN,             // <
     GREATER_THAN,         // >
     EQUAL,                // =
     EQUAL_EQUAL,          // ==
