@@ -48,7 +48,7 @@ Token Lexer::integer() {
         result += currentChar;
         advance();
     }
-    return {TokenEnum::INTEGER_LITERAL, result};
+    return {TokenEnum::INTEGER_LITERAL, result, linePos};
 }
 
 Token Lexer::identifier() {
@@ -60,7 +60,7 @@ Token Lexer::identifier() {
     if (keywords.find(result) != keywords.end()) {
         return {keywords.find(result)->second, result};
     }
-    return {TokenEnum::IDENTIFICATOR, result};
+    return {TokenEnum::IDENTIFICATOR, result, linePos};
 }
 
 Token Lexer::nextMatch(char c, TokenEnum match, TokenEnum noMatch) {
@@ -70,10 +70,10 @@ Token Lexer::nextMatch(char c, TokenEnum match, TokenEnum noMatch) {
         advance();
         return {match, std::string(1, prevChar) + std::string(1, c)};
     }
-    return {noMatch, std::string(1, prevChar)};
+    return {noMatch, std::string(1, prevChar), linePos};
 }
 
-Token Lexer::getNextToken(int line) {
+Token Lexer::getNextToken() {
     while (currentChar != '\0') {
         if (isspace(currentChar)) {
             skipWhitespace();
@@ -99,7 +99,7 @@ Token Lexer::getNextToken(int line) {
                         advance();
                     }
                     advance();
-                    return {TokenEnum::STRING_LITERAL, result};
+                    return {TokenEnum::STRING_LITERAL, result, linePos};
                 case '\'':
                     advance();
 
@@ -108,7 +108,7 @@ Token Lexer::getNextToken(int line) {
                         advance();
                     }
                     advance();
-                    return {TokenEnum::STRING_LITERAL, result};
+                    return {TokenEnum::STRING_LITERAL, result, linePos};
                 case '!':
                     return nextMatch('=', TokenEnum::NOT_EQUAL, TokenEnum::NOT);
                 case '=':
@@ -129,8 +129,8 @@ Token Lexer::getNextToken(int line) {
                 {'-', {TokenEnum::SUB, "-"}},
                 {'*', {TokenEnum::MULT, "*"}},
                 {'/', {TokenEnum::DIV, "/"}},
-                {'(', {TokenEnum::RPAREN, "("}},
-                {')', {TokenEnum::LPAREN, ")"}},
+                {'(', {TokenEnum::LPAREN, "("}},
+                {')', {TokenEnum::RPAREN, ")"}},
                 {'.', {TokenEnum::DOT, "."}},
                 {',', {TokenEnum::COMMA, ","}},
                 {';', {TokenEnum::SEMICOLON, ";"}},
@@ -138,27 +138,35 @@ Token Lexer::getNextToken(int line) {
                 {'}', {TokenEnum::RBRACE, "}"}},
                 {':', {TokenEnum::COLON, ":"}},
         };
-        std::pair<TokenEnum, std::basic_string<char>> currentToken = tokenMap.find(currentChar)->second;
+        //std::pair<TokenEnum, std::basic_string<char>> currentToken = tokenMap.find(currentChar)->second;
         if (tokenMap.find(currentChar) != tokenMap.end()) {
             advance();
-            return {currentToken.first, currentToken.second};
+            return {previous().type, previous().value, linePos};
         } else {
-            std::cerr << "Invalid character: [ " << currentChar << " ] Error at line: " << line << ". In position: " << pos << "." << std::endl;
+            std::cerr << "Invalid character: [ " << currentChar << " ] Error at line: " << linePos << ". In position: " << pos << "." << std::endl;
             advance();
-            return {TokenEnum::ERROR, std::to_string(line)};
+            return {TokenEnum::ERROR, std::to_string(linePos), linePos};
             //exit(1);
         }
     }
 
     return {TokenEnum::TOKEN_EOF, ""};
 }
+Token Lexer::previous() {
+    if(pos > 0) {
+        return {TokenEnum::ERROR, std::string(1, input[pos - 1]), linePos};
+    } else {
+        std::cerr << "Invalid character: [ " << currentChar << " ] Error at line: " << linePos << ". In position: " << pos << "." << std::endl;
+        return {TokenEnum::ERROR, "", linePos};
+    }
+}
 
-std::vector<Token> Lexer::generateTokens(int line) {
+std::vector<Token> Lexer::generateTokens() {
     std::vector<Token> tokens;
-    Token token = getNextToken(line);
+    Token token = getNextToken();
     while (token.type != TokenEnum::TOKEN_EOF) {
         tokens.emplace_back(token);
-        token = getNextToken(line);
+        token = getNextToken();
     }
     tokens.emplace_back(Token{TokenEnum::TOKEN_EOF, ""});
     return tokens;

@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "norlang",
+					"name" : "aasenscript",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "norlang::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-norlang-Debug-2c5078efcaa77d3c8f73.json",
-					"name" : "norlang",
+					"id" : "aasenscript::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aasenscript-Debug-8841cb56cc9a48902325.json",
+					"name" : "aasenscript",
 					"projectIndex" : 0
 				}
 			]

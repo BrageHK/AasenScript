@@ -10,12 +10,19 @@ void Expression::print() {
 }
 
 void Expression::recursivePrint(std::string string, std::string prefix, std::string childPrefix) {
-    string += prefix + std::to_string(static_cast<int>(Operator)) + "\n";
+    string += prefix + std::to_string(static_cast<int>(token->type)) + "\n";
     std::cout << string;
-    if(!this->Left) {;
-        this->Left->recursivePrint(string, childPrefix + "Left:   ", childPrefix + "|    ");
+
+    if(this->left != nullptr) {
+        std::cout << "left:" << static_cast<int>(this->left->token->type) << std::endl;
     }
-    if(!this->Right) {
-        this->Right->recursivePrint(string, childPrefix + "Right:  ", childPrefix + "  ");
+    if(this->right != nullptr) {
+        std::cout << "right:" << static_cast<int>(this->right->token->type) << std::endl;
     }
+    /*if(this->left != nullptr) {
+        this->left->recursivePrint(string, childPrefix + "left:   ", childPrefix + "|    ");
+    }
+    if(this->right != nullptr) {
+        this->right->recursivePrint(string, childPrefix + "right:  ", childPrefix + "  ");
+    }*/
 }

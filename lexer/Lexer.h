@@ -12,12 +12,14 @@
 struct Token {
     TokenEnum type;
     std::string value;
+    int line;
 };
 
 class Lexer {
 private:
     std::string input;
     size_t pos = 0;
+    int linePos;
     char currentChar;
 
     void advance();
@@ -30,12 +32,13 @@ private:
 
     Token nextMatch(char c, TokenEnum match, TokenEnum noMatch);
 
+    Token getNextToken();
 public:
-    explicit Lexer(const std::string& input) : input(input), currentChar(input[0]) {}
+    explicit Lexer(const std::string& input, int line) : input(input), currentChar(input[0]), linePos(line) {}
 
-    Token getNextToken(int line);
+    std::vector<Token> generateTokens();
 
-    std::vector<Token> generateTokens(int line);
+    Token previous();
 };
 
 #endif //NORLANG_LEXER_H

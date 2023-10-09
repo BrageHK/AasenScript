@@ -6,18 +6,26 @@
 #define NORLANG_EXPRESSION_H
 
 #include "../enums/TokenEnum.h"
+#include "../lexer/Lexer.h"
 #include <string>
+#include <memory>
 
 class Expression {
 private:
     void recursivePrint(std::string string, std::string prefix, std::string childPrefix);
 public:
-    Expression *Left;
-    Expression *Right;
-    TokenEnum Operator;
+    Expression *left;
+    Expression *right;
+    Token *token;
+
+    Expression(Expression* left, Expression* right, struct Token *token)
+            : left(left), right(right), token(token) {
+    };
 
     Expression(Expression* left, Expression* right, TokenEnum op)
-            : Left(left), Right(right), Operator(op) {};
+            : left(left), right(right) {
+        this->token = new Token{op, ""};
+    };
 
     void print();
 };

@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: norlang
+# Project: aasenscript
 # Configurations: Debug
 # =============================================================================
 
@@ -41,55 +41,61 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/brage/Documents/norlang/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target norlang
+# Object build statements for EXECUTABLE target aasenscript
 
 
 #############################################
-# Order-only phony target for norlang
+# Order-only phony target for aasenscript
 
-build cmake_object_order_depends_target_norlang: phony || CMakeFiles/norlang.dir
+build cmake_object_order_depends_target_aasenscript: phony || CMakeFiles/aasenscript.dir
 
-build CMakeFiles/norlang.dir/main.cpp.obj: CXX_COMPILER__norlang_Debug C$:/Users/brage/Documents/norlang/main.cpp || cmake_object_order_depends_target_norlang
-  DEP_FILE = CMakeFiles\norlang.dir\main.cpp.obj.d
+build CMakeFiles/aasenscript.dir/main.cpp.obj: CXX_COMPILER__aasenscript_Debug C$:/Users/brage/Documents/norlang/main.cpp || cmake_object_order_depends_target_aasenscript
+  DEP_FILE = CMakeFiles\aasenscript.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++23
-  OBJECT_DIR = CMakeFiles\norlang.dir
-  OBJECT_FILE_DIR = CMakeFiles\norlang.dir
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
+  OBJECT_FILE_DIR = CMakeFiles\aasenscript.dir
 
-build CMakeFiles/norlang.dir/lexer/Lexer.cpp.obj: CXX_COMPILER__norlang_Debug C$:/Users/brage/Documents/norlang/lexer/Lexer.cpp || cmake_object_order_depends_target_norlang
-  DEP_FILE = CMakeFiles\norlang.dir\lexer\Lexer.cpp.obj.d
+build CMakeFiles/aasenscript.dir/lexer/Lexer.cpp.obj: CXX_COMPILER__aasenscript_Debug C$:/Users/brage/Documents/norlang/lexer/Lexer.cpp || cmake_object_order_depends_target_aasenscript
+  DEP_FILE = CMakeFiles\aasenscript.dir\lexer\Lexer.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++23
-  OBJECT_DIR = CMakeFiles\norlang.dir
-  OBJECT_FILE_DIR = CMakeFiles\norlang.dir\lexer
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
+  OBJECT_FILE_DIR = CMakeFiles\aasenscript.dir\lexer
 
-build CMakeFiles/norlang.dir/parser/Parser.cpp.obj: CXX_COMPILER__norlang_Debug C$:/Users/brage/Documents/norlang/parser/Parser.cpp || cmake_object_order_depends_target_norlang
-  DEP_FILE = CMakeFiles\norlang.dir\parser\Parser.cpp.obj.d
+build CMakeFiles/aasenscript.dir/parser/Parser.cpp.obj: CXX_COMPILER__aasenscript_Debug C$:/Users/brage/Documents/norlang/parser/Parser.cpp || cmake_object_order_depends_target_aasenscript
+  DEP_FILE = CMakeFiles\aasenscript.dir\parser\Parser.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++23
-  OBJECT_DIR = CMakeFiles\norlang.dir
-  OBJECT_FILE_DIR = CMakeFiles\norlang.dir\parser
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
+  OBJECT_FILE_DIR = CMakeFiles\aasenscript.dir\parser
 
-build CMakeFiles/norlang.dir/parser/Expression.cpp.obj: CXX_COMPILER__norlang_Debug C$:/Users/brage/Documents/norlang/parser/Expression.cpp || cmake_object_order_depends_target_norlang
-  DEP_FILE = CMakeFiles\norlang.dir\parser\Expression.cpp.obj.d
+build CMakeFiles/aasenscript.dir/parser/Expression.cpp.obj: CXX_COMPILER__aasenscript_Debug C$:/Users/brage/Documents/norlang/parser/Expression.cpp || cmake_object_order_depends_target_aasenscript
+  DEP_FILE = CMakeFiles\aasenscript.dir\parser\Expression.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++23
-  OBJECT_DIR = CMakeFiles\norlang.dir
-  OBJECT_FILE_DIR = CMakeFiles\norlang.dir\parser
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
+  OBJECT_FILE_DIR = CMakeFiles\aasenscript.dir\parser
+
+build CMakeFiles/aasenscript.dir/parser/error.cpp.obj: CXX_COMPILER__aasenscript_Debug C$:/Users/brage/Documents/norlang/parser/error.cpp || cmake_object_order_depends_target_aasenscript
+  DEP_FILE = CMakeFiles\aasenscript.dir\parser\error.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++23
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
+  OBJECT_FILE_DIR = CMakeFiles\aasenscript.dir\parser
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target norlang
+# Link build statements for EXECUTABLE target aasenscript
 
 
 #############################################
-# Link the executable norlang.exe
+# Link the executable aasenscript.exe
 
-build norlang.exe: CXX_EXECUTABLE_LINKER__norlang_Debug CMakeFiles/norlang.dir/main.cpp.obj CMakeFiles/norlang.dir/lexer/Lexer.cpp.obj CMakeFiles/norlang.dir/parser/Parser.cpp.obj CMakeFiles/norlang.dir/parser/Expression.cpp.obj
+build aasenscript.exe: CXX_EXECUTABLE_LINKER__aasenscript_Debug CMakeFiles/aasenscript.dir/main.cpp.obj CMakeFiles/aasenscript.dir/lexer/Lexer.cpp.obj CMakeFiles/aasenscript.dir/parser/Parser.cpp.obj CMakeFiles/aasenscript.dir/parser/Expression.cpp.obj CMakeFiles/aasenscript.dir/parser/error.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\norlang.dir
+  OBJECT_DIR = CMakeFiles\aasenscript.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = norlang.exe
-  TARGET_IMPLIB = libnorlang.dll.a
-  TARGET_PDB = norlang.exe.dbg
+  TARGET_FILE = aasenscript.exe
+  TARGET_IMPLIB = libaasenscript.dll.a
+  TARGET_PDB = aasenscript.exe.dbg
 
 
 #############################################
@@ -117,7 +123,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build norlang: phony norlang.exe
+build aasenscript: phony aasenscript.exe
 
 # =============================================================================
 # Folder targets.
@@ -127,7 +133,7 @@ build norlang: phony norlang.exe
 #############################################
 # Folder: C:/Users/brage/Documents/norlang/cmake-build-debug
 
-build all: phony norlang.exe
+build all: phony aasenscript.exe
 
 # =============================================================================
 # Built-in targets

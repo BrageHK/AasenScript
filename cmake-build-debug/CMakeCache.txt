@@ -157,7 +157,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=norlang
+CMAKE_PROJECT_NAME:STATIC=aasenscript
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/ranlib.exe
@@ -238,6 +238,15 @@ CMAKE_STRIP:FILEPATH=C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/str
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+aasenscript_BINARY_DIR:STATIC=C:/Users/brage/Documents/norlang/cmake-build-debug
+
+//Value Computed by CMake
+aasenscript_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+aasenscript_SOURCE_DIR:STATIC=C:/Users/brage/Documents/norlang
 
 //Value Computed by CMake
 norlang_BINARY_DIR:STATIC=C:/Users/brage/Documents/norlang/cmake-build-debug
