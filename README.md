@@ -1,4 +1,4 @@
-# NorLang
+# AasenScript
 This certainly is a programming language
 
 # Nynorsk Programming language
