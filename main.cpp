@@ -10,19 +10,22 @@ void runFile(const char* path) {
     std::ifstream file(path);
     std::string programText;
     int lineNumber = 1;
+    std::vector<Token> tokens;
     if(file.is_open()) {
         std::string line;
         while(getline(file, line)) {
             programText.append(line);
             Lexer lexer(line, lineNumber++);
-            std::vector<Token> tokens = lexer.generateTokens();
-            for(const auto& token : tokens) {
+            std::vector<Token> currentTokens = lexer.generateTokens();
+            for(const auto& token : currentTokens) {
+                tokens.emplace_back(token);
                 std::cout << "[" << static_cast<int>(token.type) << ", " << token.value << "]" <<  std::endl;
             }
-            Parser parser(tokens);
-            parser.parse();
+
         }
         file.close();
+        Parser parser(tokens);
+        parser.parse();
     } else {
         std::cerr << "Unable to open file" << std::endl;
     }
@@ -32,6 +35,7 @@ void runFile(const char* path) {
 void runPrompt() {
     std::cout << "Norlang, et proggerpåk med forferdelig (!bra) syntax!!!" << std::endl;
     int lineNumber = 1;
+    std::vector<Token> tokens;
     for(;;) {
         std::cout << ">> ";
         std::string line;
@@ -40,14 +44,14 @@ void runPrompt() {
             break;
         }
         Lexer lexer(line, lineNumber++);
-        std::vector<Token> tokens = lexer.generateTokens();
-        for(const auto& token : tokens) {
+        std::vector<Token> currentTokens = lexer.generateTokens();
+        for(const auto& token : currentTokens) {
+            tokens.emplace_back(token);
             std::cout << "[" << static_cast<int>(token.type) << ", " << token.value << "]" <<  std::endl;
         }
-        Parser parser(tokens);
-        parser.parse();
-
     }
+    Parser parser(tokens);
+    parser.parse();
 }
 
 int main(int argc, char* argv[]) {

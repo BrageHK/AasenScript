@@ -35,3 +35,13 @@
 12	960	7185936933857120	CMakeFiles/aasenscript.dir/main.cpp.obj	2cb7aaaedf56704e
 3	1241	7185936936764287	CMakeFiles/aasenscript.dir/lexer/Lexer.cpp.obj	3e5cf58e3675c65e
 1242	1422	7185936938575802	aasenscript.exe	bb60d52af52ced90
+17	604	7185951035887689	CMakeFiles/aasenscript.dir/parser/error.cpp.obj	8128849bf4d9c13c
+22	772	7185951037557701	CMakeFiles/aasenscript.dir/parser/Expression.cpp.obj	72c34ea63f7c1c9f
+4	834	7185951038167692	CMakeFiles/aasenscript.dir/parser/Parser.cpp.obj	8d6eb3f783ac6c42
+13	876	7185951038607686	CMakeFiles/aasenscript.dir/main.cpp.obj	2cb7aaaedf56704e
+8	1155	7185951041388388	CMakeFiles/aasenscript.dir/lexer/Lexer.cpp.obj	3e5cf58e3675c65e
+1155	1336	7185951043168615	aasenscript.exe	bb60d52af52ced90
+3	731	7185954202863131	CMakeFiles/aasenscript.dir/main.cpp.obj	2cb7aaaedf56704e
+732	906	7185954204584234	aasenscript.exe	bb60d52af52ced90
+3	800	7185954940632600	CMakeFiles/aasenscript.dir/main.cpp.obj	2cb7aaaedf56704e
+800	969	7185954942292596	aasenscript.exe	bb60d52af52ced90

@@ -2,6 +2,7 @@
 
 #include "Parser.h"
 #include "Expression.h"
+#include "error.h"
 
 std::unique_ptr<Expression> Parser::expression() {
     return equality();
@@ -79,6 +80,7 @@ std::unique_ptr<Expression> Parser::primary() {
         throw std::runtime_error("Unexpected token: " + previous().value);
     }
 
+    error::throwError(currentToken, "Expected expression");
 }
 
 void Parser::advance() {
@@ -118,6 +120,28 @@ Token Parser::eat(TokenEnum type) {
     } else {
         std::cerr << "Expected token of type: " << static_cast<int>(type) << " but got: " << static_cast<int>(currentToken.type) << std::endl;
         exit(1);
+    }
+}
+
+void Parser::synchronize() {
+    advance();
+
+    while(currentToken.type != TokenEnum::TOKEN_EOF) {
+        if(previous().type == TokenEnum::SEMICOLON) return;
+
+        switch(currentToken.type) {
+            case TokenEnum::CLASS:
+            case TokenEnum::FUNCTION:
+            case TokenEnum::VAR:
+            case TokenEnum::FOR:
+            case TokenEnum::IF:
+            case TokenEnum::WHILE:
+            case TokenEnum::PRINT:
+            case TokenEnum::RETURN:
+                return;
+            default:
+                advance();
+        }
     }
 }
 

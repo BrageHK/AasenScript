@@ -30,12 +30,15 @@ private:
     std::unique_ptr<Expression> unary();
     std::unique_ptr<Expression> primary();
 
+    void synchronize();
+
 public:
     explicit Parser(std::vector<Token> tokens) : tokens(std::move(tokens)) {
         this->currentToken = this->tokens[0];
     }
 
     void parse();
+
 
 };
 

@@ -24,7 +24,8 @@ std::unordered_map<std::string, TokenEnum> keywords = {
         {"urørleg", TokenEnum::CONST},
         {"Sanning", TokenEnum::BOOL},
         {"usann", TokenEnum::FALSE},
-        {"sann", TokenEnum::TRUE}
+        {"sann", TokenEnum::TRUE},
+        {"variabel", TokenEnum::VAR}, // Hadde vært morsomt å bruke "storleik", men det blir litt feil
 };
 
 void Lexer::advance() {
@@ -143,14 +144,15 @@ Token Lexer::getNextToken() {
             advance();
             return {previous().type, previous().value, linePos};
         } else {
-            std::cerr << "Invalid character: [ " << currentChar << " ] Error at line: " << linePos << ". In position: " << pos << "." << std::endl;
+            std::cerr << "Invalid character: [ " << currentChar <<
+            " ] Error at line: " << linePos << ". In position: " << pos << "." << std::endl;
             advance();
             return {TokenEnum::ERROR, std::to_string(linePos), linePos};
             //exit(1);
         }
     }
 
-    return {TokenEnum::TOKEN_EOF, ""};
+    return {TokenEnum::TOKEN_EOF, "", linePos};
 }
 Token Lexer::previous() {
     if(pos > 0) {
@@ -168,6 +170,6 @@ std::vector<Token> Lexer::generateTokens() {
         tokens.emplace_back(token);
         token = getNextToken();
     }
-    tokens.emplace_back(Token{TokenEnum::TOKEN_EOF, ""});
+    tokens.emplace_back(Token{TokenEnum::TOKEN_EOF, "", linePos});
     return tokens;
 }

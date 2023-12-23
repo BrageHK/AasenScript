@@ -52,6 +52,7 @@ enum class TokenEnum : int {
     BOOL,                 // Sanning
     FALSE,                // usanning
     TRUE,                 // sanning
+    VAR,                  // variabel
 
 
 };
